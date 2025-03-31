@@ -1,10 +1,10 @@
 var isCacheCleared = false;
-const cacheName = "GameSolutions-PurpleFro-0.10";
+const cacheName = "GameSolutions-PurpleFro-0.3.1";
 const contentToCache = [
-    "Build/PurpleFroPage.loader.js",
-    "Build/PurpleFroPage.framework.js.unityweb",
-    "Build/PurpleFroPage.data.unityweb",
-    "Build/PurpleFroPage.wasm.unityweb",
+    "Build/Dev.loader.js",
+    "Build/Dev.framework.js.unityweb",
+    "Build/Dev.data.unityweb",
+    "Build/Dev.wasm.unityweb",
     "TemplateData/style.css"
 ];
 

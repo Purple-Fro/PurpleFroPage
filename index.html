@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>PurpleFRO</title>
+    <title>PurpleFro</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <link rel="manifest" href="manifest.webmanifest">
@@ -15,10 +15,8 @@
 </head>
 
 <body>
-    <div id="unity-fullscreen-button-open" style="display: none;"></div>
-    <div id="unity-fullscreen-button-exit" style="display: none;"></div>
     <div id="unity-container" class="unity-desktop">
-        <canvas id="unity-canvas" width="1280" height="720" tabindex="-1"></canvas>
+        <canvas id="unity-canvas" width=540 height=960 tabindex="-1"></canvas>
         <div id="unity-loading-bar">
             <div id="unity-logo"></div>
             <div id="unity-progress-bar-empty">
@@ -27,7 +25,11 @@
         </div>
         <div id="unity-warning"></div>
     </div>
+
+    <script type="text/javascript" src="SheetsDataFetcher.js"></script>
     <script>
+        var gameInstance = null;
+
         window.addEventListener("load", function () {
             if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("ServiceWorker.js");
@@ -59,16 +61,16 @@
         }
 
         var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/PurpleFroPage.loader.js";
+        var loaderUrl = buildUrl + "/Dev.loader.js";
         var config = {
             arguments: [],
-            dataUrl: buildUrl + "/PurpleFroPage.data.unityweb",
-            frameworkUrl: buildUrl + "/PurpleFroPage.framework.js.unityweb",
-            codeUrl: buildUrl + "/PurpleFroPage.wasm.unityweb",
+            dataUrl: buildUrl + "/Dev.data.unityweb",
+            frameworkUrl: buildUrl + "/Dev.framework.js.unityweb",
+            codeUrl: buildUrl + "/Dev.wasm.unityweb",
             streamingAssetsUrl: "StreamingAssets",
             companyName: "GameSolutions",
             productName: "PurpleFro",
-            productVersion: "0.10",
+            productVersion: "0.3.1",
             showBanner: unityShowBanner,
         };
 
@@ -109,19 +111,20 @@
         var script = document.createElement("script");
         script.src = loaderUrl;
         script.onload = () => {
+            sheetsDataFetcher.loadSheets();
             createUnityInstance(canvas, config, (progress) => {
                 progressBarFull.style.width = 100 * progress + "%";
             }).then((unityInstance) => {
+                gameInstance = unityInstance;
                 loadingBar.style.display = "none";
-                document.querySelector("#unity-fullscreen-button-exit").onclick = () => {
-                    unityInstance.SetFullscreen(0);
-                };
             }).catch((message) => {
                 alert(message);
             });
         };
 
         document.body.appendChild(script);
+
+
     </script>
 </body>
 
