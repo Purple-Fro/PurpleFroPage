@@ -9,7 +9,9 @@ if (uid !== null) {
   playerDataFetcher.playerId = uid;
 }
 else {
-  playerDataFetcher.playerId = -414588547;
+  const tg_user = window.Telegram.WebApp.initDataUnsafe?.user;
+  playerDataFetcher.playerId = tg_user?.id;
+  // 414588547
 }
 
 /** Utility */
