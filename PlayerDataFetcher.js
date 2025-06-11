@@ -9,7 +9,7 @@ if (uid !== null) {
   playerDataFetcher.playerId = uid;
 }
 else {
-  playerDataFetcher.playerId = 414588547;
+  playerDataFetcher.playerId = -414588547;
 }
 
 /** Utility */
