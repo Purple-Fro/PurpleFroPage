@@ -27,7 +27,12 @@
     </div>
 
     <script type="text/javascript" src="SheetsDataFetcher.js"></script>
+    <script type="text/javascript" src="PlayerDataFetcher.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js?57"></script>
     <script>
+        let tg = window.Telegram.WebApp;
+        tg.requestFullscreen();
+
         var gameInstance = null;
 
         window.addEventListener("load", function () {
@@ -61,16 +66,16 @@
         }
 
         var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/PurpleFroPage.loader.js";
+        var loaderUrl = buildUrl + "/PurpleFro.loader.js";
         var config = {
             arguments: [],
-            dataUrl: buildUrl + "/PurpleFroPage.data.unityweb",
-            frameworkUrl: buildUrl + "/PurpleFroPage.framework.js.unityweb",
-            codeUrl: buildUrl + "/PurpleFroPage.wasm.unityweb",
+            dataUrl: buildUrl + "/PurpleFro.data.unityweb",
+            frameworkUrl: buildUrl + "/PurpleFro.framework.js.unityweb",
+            codeUrl: buildUrl + "/PurpleFro.wasm.unityweb",
             streamingAssetsUrl: "StreamingAssets",
             companyName: "GameSolutions",
             productName: "PurpleFro",
-            productVersion: "0.8.0",
+            productVersion: "0.11.0",
             showBanner: unityShowBanner,
         };
 
@@ -112,13 +117,15 @@
         script.src = loaderUrl;
         script.onload = () => {
             sheetsDataFetcher.loadSheets();
-            createUnityInstance(canvas, config, (progress) => {
-                progressBarFull.style.width = 100 * progress + "%";
-            }).then((unityInstance) => {
-                gameInstance = unityInstance;
-                loadingBar.style.display = "none";
-            }).catch((message) => {
-                alert(message);
+            playerDataFetcher.loadPlayerData().then(_ => {
+                createUnityInstance(canvas, config, (progress) => {
+                    progressBarFull.style.width = 100 * progress + "%";
+                }).then((unityInstance) => {
+                    gameInstance = unityInstance;
+                    loadingBar.style.display = "none";
+                }).catch((message) => {
+                    alert(message);
+                });
             });
         };
 

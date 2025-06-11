@@ -1,9 +1,16 @@
 var playerDataFetcher = {};
+const urlParams = new URLSearchParams(window.location.search);
 
 /** Request parameters */
-playerDataFetcher.serverUrl = "http://188.225.57.219:5000"
+playerDataFetcher.serverUrl = "https://test.purplefro.com/api"
 playerDataFetcher.loadPlayerDataUri = "/status/"
-playerDataFetcher.playerId = 167002776; // TODO: Get if from TG. If TG instance exists, then wait for it to give a user ID before initializing Unity game.
+uid = urlParams.get('user_id');
+if (uid !== null) {
+  playerDataFetcher.playerId = uid;
+}
+else {
+  playerDataFetcher.playerId = 414588547;
+}
 
 /** Utility */
 playerDataFetcher.loadedPlayerData = null;
@@ -23,7 +30,8 @@ playerDataFetcher.loadPlayerData = async function() {
     const response = await fetch(playerDataFetcher.loadPlayerDataUrl);
     const data = await response.text();
     console.log('Loaded ', data);
-    return JSON.parse(data);
+    playerDataFetcher.loadedPlayerData = JSON.parse(data);
+    return playerDataFetcher.loadedPlayerData;
   } catch (reason) {
     console.error('[playerDataFetcher] Failed to fetch player data:\n' + reason);
     playerDataFetcher.loadedPlayerDataPromise = null;
@@ -31,7 +39,7 @@ playerDataFetcher.loadPlayerData = async function() {
   }
 };
 
-playerDataFetcher.getLoadedSheets = function() {
+playerDataFetcher.getLoadedPlayerData = function() {
   return playerDataFetcher.loadedPlayerData;
 };
 
