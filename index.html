@@ -80,7 +80,7 @@
             streamingAssetsUrl: "StreamingAssets",
             companyName: "GameSolutions",
             productName: "PurpleFro",
-            productVersion: "0.11.0",
+            productVersion: "0.12.0",
             showBanner: unityShowBanner,
         };
 
@@ -96,25 +96,6 @@
             canvas.style.width = "100%";
             canvas.style.height = "100%";
         }
-
-        function resizeCanvas() {
-            var container = document.getElementById("unity-container");
-            var width = container.clientWidth;
-            var height = container.clientHeight;
-            var aspectRatio = 9 / 16;
-
-            if (width / height > aspectRatio) {
-                width = height * aspectRatio;
-            } else {
-                height = width / aspectRatio;
-            }
-
-            canvas.style.width = width + "px";
-            canvas.style.height = height + "px";
-        }
-
-        window.addEventListener('load', resizeCanvas);
-        window.addEventListener('resize', resizeCanvas);
 
         loadingBar.style.display = "block";
 
