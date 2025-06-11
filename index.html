@@ -30,8 +30,13 @@
     <script type="text/javascript" src="PlayerDataFetcher.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js?57"></script>
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.requestFullscreen();
+        try { 
+            let tg = window.Telegram.WebApp;
+            tg.requestFullscreen();
+        }
+        catch (reason) {
+            console.log(reason);
+        }
 
         var gameInstance = null;
 
