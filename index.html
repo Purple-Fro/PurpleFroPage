@@ -30,9 +30,20 @@
     <script type="text/javascript" src="PlayerDataFetcher.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js?57"></script>
     <script>
+        let username = "Anonymous";
         try { 
-            let tg = window.Telegram.WebApp;
-            tg.requestFullscreen();
+            const tgWebApp = window.Telegram.WebApp;
+            tgWebApp.requestFullscreen();
+            tgWebApp.expand();
+            
+            // Get user data
+            const user = tgWebApp.initDataUnsafe.user;
+            
+            if (user) {
+                playerDataFetcher.username = user.username;
+            } else {
+                console.log("User data not available");
+            }
         }
         catch (reason) {
             console.log(reason);
@@ -80,7 +91,7 @@
             streamingAssetsUrl: "StreamingAssets",
             companyName: "GameSolutions",
             productName: "PurpleFro",
-            productVersion: "0.17.0",
+            productVersion: "0.18.0",
             showBanner: unityShowBanner,
         };
 

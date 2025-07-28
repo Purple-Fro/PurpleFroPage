@@ -11,6 +11,7 @@ if (uid !== null) {
 else {
   playerDataFetcher.playerId = 414588547;
 }
+playerDataFetcher.username = "Anonymous";
 
 /** Utility */
 playerDataFetcher.loadedPlayerData = null;
