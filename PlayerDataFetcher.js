@@ -36,7 +36,8 @@ playerDataFetcher.loadPlayerData = async function() {
   } catch (reason) {
     console.error('[playerDataFetcher] Failed to fetch player data:\n' + reason);
     playerDataFetcher.loadedPlayerDataPromise = null;
-    throw reason;
+    playerDataFetcher.loadedPlayerData = null;
+    return null;
   }
 };
 
